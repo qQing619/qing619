@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ng-option</title>
+	<link rel="stylesheet" type="text/css" href="css/base.css">
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<style type="text/css">
+		b{
+			color: red;
+		}
+		li{
+			margin-top: 20px;
+		}
+	</style>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+	<ul>
+		<li ng-repeat="user in userTitleList">
+			<b>{{user.Username}}</b><br />
+			<h2>{{user.Title}}</h2><br />
+			<span>{{user.Time}}</span><br />
+			<strong>{{user.likeAcount}}</strong>
+			<like content="user"></like><br />
+			<ul>
+				<li ng-repeat="liker in user.likeList">{{liker.perTolike}}</li>
+			</ul>
+		</li>
+	</ul>
+	<script type="text/javascript">
+		var app=angular.module('myApp',[]);
+		// 给myApp模块添加一个控制器myCtrl这个控制器的作用域为$scope
+		app.controller('myCtrl',function($scope){
+			$scope.userTitleList = [
+				{Username:"zkl",Title:'今天好像没有下雨',Time:"2016-07-05",likeAcount:0,likeList:[]},
+				{Username:"zkl",Title:'我今天差点就迟到了',Time:"2016-07-04",likeAcount:0,likeList:[]},
+				{Username:"zkl",Title:'你这样一直下雨好吗',Time:"2016-07-03",likeAcount:0,likeList:[]},
+				{Username:"zkl",Title:'下午我一直在打篮球',Time:"2016-07-02",likeAcount:0,likeList:[]},
+				{Username:"zkl",Title:'感觉生无可恋的啊',Time:"2016-07-01",likeAcount:0,likeList:[]},
+			]
+		})
+
+		// 自定义模块 自定义标签like
+		app.directive('like',function(){
+			var direction=[];
+			direction.restirct="EA";
+			direction.template="<input type='button' ng-click='liker()' value='点赞'>";
+			// 表示从外部传进来的变量content
+			direction.scope={
+				content:'='
+			}
+			// 连接到外部作用域 link为属性
+			direction.link=function($scope){
+				$scope.liker=function(){
+					$scope.content.likeAcount=$scope.content.likeAcount+1;
+					$scope.content.likeList.push({perTolike:"呵呵"})
+				}
+			}
+			return direction;
+		})
+	</script>
+</body>
+</html>

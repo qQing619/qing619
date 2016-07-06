@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ng-option</title>
+	<link rel="stylesheet" type="text/css" href="css/base.css">
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<style type="text/css">
+		b{
+			color: red;
+		}
+		li{
+			margin-top: 20px;
+		}
+	.notice{
+		color: #000;
+	}
+	</style>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+	<form ng-submit="postForm()" name="myform">
+		<ul>
+			<li>
+				用户名：<input type="text" ng-model="Name" name="username" ng-pattern="/^\w{8,18}$/" required>
+				<b class="notice" ng-show="myform.username.$dirty&&myform.username.$invalid">
+					<span ng-show="myform.username.$error.required">用户名不能为空</span>
+					<span>请输入8-18位名称</span>
+				</b>
+			</li>
+			<li>
+				手机号：<input type="text" ng-model="phone" name="myphone" ng-pattern="/^1[3578]\d{9}$/">
+				<b class="notice" ng-show="myform.myphone.$dirty&&myform.myphone.$invalid">
+					<span ng-show="myform.username.$error.required">请输入手机号</span>
+					<span>请输入正确手机号</span>
+				</b>
+			</li>
+			<li>
+				邮箱：<input type="text" ng-model="email" name="myemail" ng-pattern="/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/">
+				<b class="notice" ng-show="myform.myemail.$dirty&&myform.myemail.$invalid">
+					<span ng-show="myform.username.$error.required">请输入邮箱</span>
+					<span>请输入正确邮箱</span>
+				</b>
+			</li>
+			<li>
+				<input type="submit" value="提交" ng-disable="myform.$invalid">
+			</li>
+		</ul>
+	</form>
+	<script type="text/javascript">
+		var app=angular.module('myApp',[]);
+		// 给myApp模块添加一个控制器myCtrl这个控制器的作用域为$scope
+		app.controller('myCtrl',function($scope){
+			// $scope.Name="haha";
+			$scope.Form={};
+			$scope.locationCityList=[
+			{value:"离歌",cityId:'离歌'},
+			{value:"天空之城",cityId:'天空之城'},
+			{value:"雅俗共赏",cityId:'雅俗共赏'},
+			{value:"听",cityId:'听'}
+			];
+			$scope.FormObjData={
+				username:" ",
+				nikename:" ",
+			}
+			$scope.postForm=function(){
+				if($scope.Form.username==""||$scope.Form.username==undefined){
+					// alert("用户名不能为空")
+				}
+				console.log($scope.Form);
+				$scope.Form=angular.copy($scope.FormObjData);
+			}
+		})
+	</script>
+<!--$dirty		表单有填写记录
+$valid			字段内容合法的
+$invalid		字段内容是非法的
+$pristine		表单没有填写记录 -->
+</body>
+</html>

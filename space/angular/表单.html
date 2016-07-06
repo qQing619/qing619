@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件</title>
+	<link rel="stylesheet" type="text/css" href="css/base.css">
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<style type="text/css">
+		/*div{
+			width: 800px;
+			height: 600px;
+			margin: 40px auto;
+		}*/
+
+	</style>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+	<div style="margin-top: 30">
+		<b>:ng-submit</b>
+		<form ng-submit="postData()">
+			<ul>
+				<li>姓名：<input type="text" ng-model="username"></li>
+				<li>密码：<input type="password" ng-model="pwd"></li>
+				<li>邮箱：<input type="email" ng-model="email"></li>
+				<li>手机：<input type="tel" ng-model="tel"></li>			<!-- ng-disabled="true"为true时失效。不可点击 -->
+				<li><input type="submit" value="提交"></li>
+			</ul>
+		</form>
+	</div>
+
+	<div ng-click="showbtn"></div>
+	<div ng-show="showFlag">
+		<p>其实很简单其实并不难</p>
+	</div>
+
+	<div ng-click="showbtn2"></div>
+	<div ng-show="ifFlag">
+		<p>其实很简单其实并不难</p>
+	</div>
+		
+	<div>
+		<img ng-src="http://statics.daydays.com/lib/css/i/slogo.png">
+		<img ng-src="pic6.jpg">
+	</div>
+	<script type="text/javascript">
+		var app=angular.module('myApp',[]);
+		// 给myApp模块添加一个控制器myCtrl这个控制器的作用域为$scope
+		app.controller('myCtrl',function($scope){
+			$scope.count=0;
+			$scope.counter=function(){
+				$scope.count=$scope.count+1;
+			}
+			$scope.postData=function(){
+				var name=$scope.username;
+				var pwd=$scope.pwd;
+				var email=$scope.email;
+				var tel=$scope.tel;
+				console.log({name:name,pwd:pwd,email:email,tel:tel})
+			}
+// 为false时隐藏
+			$scope.showFlag=true;
+			$scope.showbtn=function(){
+				$scope.showFlag=!$scope.showFlag;
+			}
+// 为false时移除
+			$scope.ifFlag=true;
+			$scope.showbtn2=function(){
+				$scope.ifFlag=!$scope.ifFlag;
+			}
+		})
+	</script>
+
+	<!-- 事件指令:
+ng-focus
+ng-click
+ng-dblclick  双击
+ng-mousedown
+ng-mouseenter
+ng-mouseleave
+ng-mousemove
+ng-keydown
+ng-keyup
+ng-keypress
+ng-change 
+
+ng-if定义和用法
+ng-if 指令用于在表达式为 false 时移除 HTML 元素。
+如果 if 语句执行的结果为 true，会添加移除元素，并显示。
+而 ng-if 是从 DOM 中移除元素。
+
+-->
+
+</body>
+</html>

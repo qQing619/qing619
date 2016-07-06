@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单</title>
+	<link rel="stylesheet" type="text/css" href="css/base.css">
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<style type="text/css">
+		li{
+			padding: 15px;
+		}
+		
+	</style>
+</head>
+<body ng-app="myApp">
+	<ul ng-controller="myCtrl">
+		<li>姓:<input ng-model="xing" type="text" required></li>
+		<li>名:<input ng-model="ming" type="text"></li>
+		<li>thanks: {{xing}} {{ming}}</li>
+		<li>hello {{fullName}}</li>
+	</ul>
+
+	<div ng-controller="myCtrl1">
+		<h1>{{admin}}</h1>
+		<h2>{{location}}</h2>
+		<button ng-click="ChangeHouse()">密码</button>
+		<div ng-controller="myCtrl2">
+			<h1>{{pwd}}</h1>
+			<h2>{{location}}</h2>
+			<button>{{mobile}}</button>
+		</div>
+		<div ng-controller="myCtrl3">
+			<h1>{{gf}}</h1>
+			<h2>{{location}}</h2>
+			<button ng-click="call()">{{mobile}}</button>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		var app=angular.module('myApp',[]);
+		app.controller('myCtrl',function($scope){
+			$scope.xing="";
+			$scope.ming="";
+			$scope.$watch('xing',function(){
+				$scope.fullName=$scope.xing+ "" +$scope.ming;
+			})
+			$scope.$watch('ming',function(){
+				$scope.fullName=$scope.xing+ "" +$scope.ming;
+			});
+
+		});
+		app.controller('myCtrl2',function($scope){
+			$scope.pwd="he";
+			$scope.mobile="待机";
+			$scope.$on('yourgfcall',function(){
+				// $broadcast向外传递消息
+				$scope.$broadcast('your')
+			})
+		})
+		app.controller('myCtrl1',function($scope){
+			$scope.admin="ha";
+			$scope.location="dddddd";
+			$scope.ChangeHouse=function(){
+				$scope.location="bbbbbbbb";
+			};
+			$scope.$on('callTozou',function(){
+				// $broadcast向外传递消息
+				$scope.$broadcast('yourgfcall')
+			})
+		});
+		
+		app.controller('myCtrl3',function($scope){
+			$scope.admin="hu";
+			$scope.location="asasd";
+			$scope.mobile="待机";
+			$scope.call=function(){
+				$scope.mobile="拨号中";
+				$scope.$emit('gfcall')
+			}
+		});
+	</script>
+</body>
+</html>

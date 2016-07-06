@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单</title>
+	<link rel="stylesheet" type="text/css" href="css/base.css">
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<style type="text/css">
+		li{
+			padding: 15px;
+		}
+		/*input.ng-invalid{
+			background-color: #f66;
+		}*/
+		/*input.ng-dirty{
+			background-color: #ccc;
+		}*/
+		/*input.ng-empty{
+			background-color: #00f;
+		}*/
+		/*input.ng-not-empty{
+			border:10px solid #000
+		}*/
+		/*所有控件的出事状态*/
+		input.ng-pristine{
+			background-color: #0f0;
+		}
+		/*点击的颜色*/
+		/*input.ng-touched{
+			background: skyblue;
+		}
+		input.ng-untouched{
+			background: salmon;
+		}	*/
+		input.ng-valid{
+			background: pink;
+		}
+		/*匹配正确后的颜色*/
+		input.ng-invalid{
+			background: #000;
+		}
+	</style>
+</head>
+<body ng-app ng-controller="myCtrl">
+	<ul>
+		<li>姓:<input ng-model="xing" type="text" required></li>
+		<li>名:<input ng-model="ming" type="text"></li>
+		<li>年龄:<input ng-model="age" type="text"></li>
+		<li>手机:<input ng-model="tel" pattern="^1[3,5,7,8]\d{9}$" type="text"></li>
+	</ul>
+	<script type="text/javascript">
+
+	</script>
+</body>
+</html>

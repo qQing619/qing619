@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ng-option</title>
+	<link rel="stylesheet" type="text/css" href="css/base.css">
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<style type="text/css">
+		div{
+			margin-top: 60px;
+			margin-left: 100px;
+		}
+		
+	</style>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+	<div>
+	<h2>输出名称</h2>
+		<select ng-model="citySelect">
+			<option value="">请选择</option>
+			<option ng-repeat="city in cityList">{{city}}</option>
+		</select>
+		<h3>{{citySelect}}</h3>
+	</div>
+
+	<div>
+	<h2>数组输出ID</h2>
+		<!-- <select ng-model="Select" ng-options="city.value for city in locationCityList"> -->
+		<select ng-model="Select" ng-options="city.cityId as city.value for city in locationCityList">
+			<option value="">请选择</option>
+			<!-- <option  ng-repeat="city in localtionCityList">{{city}}</option> -->
+		</select>
+		<!-- <h3>{{Select.cityId}}</h3> -->
+		<h3>{{Select}}</h3>
+	</div>
+
+
+	<div>
+	<h2>对象汽车排行榜</h2>
+		<!-- <select ng-model="car" ng-options="car.brand for car in cars"> -->
+		<!-- <select ng-model="car" ng-options="y.brand for y in cars"> -->
+		<select ng-model="car" ng-options="y.brand for (x,y) in cars">
+			<option value="">请选择</option>
+		</select>
+		<!-- <h3>{{car.brand}}</h3> -->
+		<h3>品牌：{{car.brand}}</h3>
+		<h3>模型：{{car.model}}</h3>
+		<h3>颜色：{{car.color}}</h3>
+	</div>
+	<script type="text/javascript">
+		var app=angular.module('myApp',[]);
+		// 给myApp模块添加一个控制器myCtrl这个控制器的作用域为$scope
+		app.controller('myCtrl',function($scope){
+			$scope.cityList = ['离歌','天空之城','雅俗共赏','听'];
+			$scope.locationCityList=[
+			{value:"离歌",cityId:'1'},
+			{value:"天空之城",cityId:'2'},
+			{value:"雅俗共赏",cityId:'3'},
+			{value:"听",cityId:'4'}
+			];
+			$scope.cars = {
+				car01 : {brand : "Ford", model : "Mustang", color : "red"},
+				car02 : {brand : "Fiat", model : "500", color : "white"},
+				car03 : {brand : "Volvo", model : "XC90", color : "black"}
+			};
+
+		})
+	</script>
+</body>
+</html>

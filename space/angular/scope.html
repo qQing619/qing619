@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>angular第一课</title>
+	<link rel="stylesheet" type="text/css" href="css/base.css">
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<style type="text/css">
+		li{
+			padding: 15px;
+		}
+		th,td{
+			width: 60px;
+			height: 30px;
+		}
+	</style>
+</head>
+<body ng-app="myApp">
+	<div ng-controller="myCtrl">
+		<!-- <b>点击数量：<span ng-model="count">{{count}}</span></b> -->
+		<b>点击数量：<span ng-bind="count"></span></b>
+		<!-- <button ng-click="count=count+1">点击</button> -->
+		<button ng-click="countAdd()">点击</button>
+	</div>
+
+
+	<div ng-controller="myCtrl1">
+		<b>点击数量：<span>{{count}}</span></b>
+		<button ng-click="countAdd()">点击</button>
+		<p ng-show="hideFlag">说的是说的是</p>
+		<button ng-click="HideContex()">{{btnContext}}</button>
+	</div>
+
+	<script type="text/javascript">
+		var app=angular.module('myApp',[]);
+		app.controller('myCtrl',function($scope){
+			$scope.count=0;
+			$scope.countAdd=function(){
+				// $scope.count=$scope.count+1;
+				$scope.count=$scope.count+1;
+			}
+		})
+
+		app.controller('myCtrl1',function($scope $rootScope){
+			$scope.count=100;
+			$rootScope.Class="说的";
+			$scope.countAdd=function(){
+				// $scope.count=$scope.count+1;
+				$scope.count=$scope.count+111;
+			}
+			$scope.hideFlag=true;
+			$scope.btnContext="隐藏";
+			$scope.HideContex=function(){
+				$scope.hideFlag=!$scope.hideFlag;
+				if($scope.hideFlag){
+					$scope.btnContext="隐藏";
+				}
+				else{
+					$scope.btnContext="显示"
+				}
+				return false;
+			}
+		})
+	</script>
+</body>
+</html>

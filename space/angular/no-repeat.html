@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>angular第一课</title>
+	<link rel="stylesheet" type="text/css" href="css/base.css">
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<style type="text/css">
+		li{
+			padding: 15px;
+		}
+	</style>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+	<h3>angular模式</h3>
+	<ul ng-app ng-init="count=0;price=0">
+		<li>数量：<input type="text" ng-model="count"></li>
+		<li>单价：<input type="text" ng-model="price"></li>
+		<li>总价：${{count*price||0}}</li>
+		<li>{{5+5}}</li>
+		<li>名字：<input type="text" ng-model="userN"></li>
+		<li>年龄；<input type="text" ng-model="userA"></li>
+		<li>我：{{userN+''+userA}}</li>
+	</ul>
+	<ul>
+		<li ng-repeat="x in ho">{{x}}</li>
+	</ul>
+	<!-- 元素名 E-->
+	<my-directive></my-directive>
+	<!-- 属性A -->
+	<!-- <div my-directive></div> -->
+	<!-- 类名C -->
+	<!-- <div class="my-directive"></div> -->
+	<!-- M注释 -->
+	<script type="text/javascript">
+	// 定义一个myApp模块
+		var app=angular.module('myApp',[]);
+		// 给myApp模块添加一个控制器myCtrl这个控制器的作用域为$scope
+		app.controller('myCtrl',function($scope){
+			$scope.userN="青";
+			$scope.userA="青";
+			$scope.ho=["哈哈","呵呵","呼呼","吼吼"];
+			
+		})
+		app.directive('myDirective',function(){
+			return{
+				restrict:"E",
+				template:"<h1>巢成雏长大</h1>"
+			}
+		})
+	</script>
+</body>
+</html>

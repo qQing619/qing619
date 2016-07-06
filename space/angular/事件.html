@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件</title>
+	<link rel="stylesheet" type="text/css" href="css/base.css">
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<style type="text/css">
+		div{
+			width: 800px;
+			height: 600px;
+			margin: 40px auto;
+		}
+	</style>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+	<div>
+		<b>ng-click:</b><br>
+		<b>数量：</b><br>
+		<span>{{count||0}}</span><br>
+		<button ng-click="count=count+1">点击1</button><br>
+		<button ng-click="counter()">点击2</button><br>
+		<input type="text" ng-change="counter()" ng-model="change"><br>
+		<input type="text" ng-focus="counter()" ng-model="focus"><br>
+		<input type="text" ng-dblclick="counter()" ng-model="dblclick"><br>
+		<input type="text" ng-mousedown="counter()" ng-model="mousedown"><br>
+		<input type="text" ng-mouseenter="counter()" ng-model="mouseenter"><br>
+		<input type="text" ng-mouseleave="counter()" ng-model="mouseleave"><br>
+		<input type="text" ng-mousemove="counter()" ng-model="mousemove"><br>
+		<input type="text" ng-keydown="counter()" ng-model="keydown"><br>
+	</div>
+	<script type="text/javascript">
+		var app=angular.module('myApp',[]);
+		// 给myApp模块添加一个控制器myCtrl这个控制器的作用域为$scope
+		app.controller('myCtrl',function($scope){
+			$scope.count=0;
+			$scope.counter=function(){
+				$scope.count=$scope.count+1;
+			}
+		})
+	</script>
+
+	<!-- 事件指令:
+ng-focus
+ng-click
+ng-dblclick  双击
+ng-mousedown
+ng-mouseenter
+ng-mouseleave
+ng-mousemove
+ng-keydown
+ng-keyup
+ng-keypress
+ng-change -->
+
+</body>
+</html>
